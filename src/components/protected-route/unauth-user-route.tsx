@@ -4,12 +4,11 @@ import { useSelector, UseSelector } from 'react-redux';
 import { Preloader } from '@ui';
 import { RootState } from 'src/services/root-reducer';
 
-export const ProtectedRoute = (props: { children: ReactNode }) => {
-  const location = useLocation();
+export const UnAuthUserRoute = (props: { children: ReactNode }) => {
   const userState = useSelector((state: RootState) => state.user);
 
-  if (!userState.user) {
-    return <Navigate to='/login' state={{ from: location }} replace />;
+  if (userState.user) {
+    return <Navigate to='/' replace />;
   }
 
   if (!userState.checked) {

@@ -22,6 +22,8 @@ import { fetchIngridients } from '../../services/slices/ingridients-slice';
 import { fetchUser } from '../../services/slices/user-slice';
 import { AppDispatch } from '../../services/store';
 import { RootState } from 'src/services/root-reducer';
+import { fetchFeeds } from '../../services/slices/feed-slice';
+import { UnAuthUserRoute } from '../protected-route/unauth-user-route';
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -57,17 +59,17 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <ProtectedRoute>
+            <UnAuthUserRoute>
               <Login />
-            </ProtectedRoute>
+            </UnAuthUserRoute>
           }
         />
         <Route
           path='/register'
           element={
-            <ProtectedRoute>
+            <UnAuthUserRoute>
               <Register />
-            </ProtectedRoute>
+            </UnAuthUserRoute>
           }
         />
         <Route
