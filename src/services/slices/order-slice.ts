@@ -95,6 +95,7 @@ const orderSlice = createSlice({
         (state, action: PayloadAction<TOrder>) => {
           state.orderRequest = false;
           state.orderRequestModalData = action.payload;
+          state.userOrders.push(action.payload);
         }
       )
       .addCase(createOrder.rejected, (state, action) => {

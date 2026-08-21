@@ -46,7 +46,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchIngridients());
     dispatch(fetchUser());
-  }, [dispatch]);
+  }, []);
 
   const handleCloseModalWindow = () => navigate(-1);
 
@@ -75,9 +75,9 @@ const App = () => {
         <Route
           path='/forgot-password'
           element={
-            <ProtectedRoute>
+            <UnAuthUserRoute>
               <ForgotPassword />
-            </ProtectedRoute>
+            </UnAuthUserRoute>
           }
         />
         <Route
