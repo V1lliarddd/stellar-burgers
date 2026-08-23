@@ -17,17 +17,14 @@ export const Feed: FC = () => {
   }, []);
 
   if (feedState.isLoading) {
-    console.log('1');
     return <Preloader />;
   }
 
   if (feedState.error) {
-    console.log('2');
     return <div className=''>{feedState.error}</div>;
   }
 
   if (!orders.length) {
-    console.log('3');
     return <Preloader />;
   }
 

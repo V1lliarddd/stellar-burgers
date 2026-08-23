@@ -6,6 +6,7 @@ export type TOrderState = {
   orderRequest: boolean;
   orderRequestModalData: TOrder | null;
   orderRequestError: string | null;
+  orderRequestByNumber: TOrder | null;
 };
 
 export type TUserOrdersState = {
@@ -24,6 +25,7 @@ const initialState: TOrderState & TUserCurrentOrder & TUserOrdersState = {
   orderRequest: false,
   orderRequestModalData: null,
   orderRequestError: null,
+  orderRequestByNumber: null,
   userOrders: [],
   userOrdersIsLoading: false,
   userOrdersErrors: null,
@@ -125,8 +127,7 @@ const orderSlice = createSlice({
       .addCase(
         fetchOrderByNumber.fulfilled,
         (state, action: PayloadAction<TOrder>) => {
-          state.userCurrentOrderIsLoading = false;
-          state.userCurrnetOrder = action.payload;
+          state.orderRequestByNumber = action.payload;
         }
       )
       .addCase(fetchOrderByNumber.rejected, (state, action) => {
