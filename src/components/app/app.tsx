@@ -16,32 +16,26 @@ import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { Preloader } from '@ui';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchIngridients } from '../../services/slices/ingridients-slice';
 import { fetchUser } from '../../services/slices/user-slice';
-import { AppDispatch } from '../../services/store';
-import { RootState } from 'src/services/root-reducer';
 import { fetchFeeds } from '../../services/slices/feed-slice';
-import { UnAuthUserRoute } from '../protected-route/unauth-user-route';
+import { useDispatch, useSelector } from '../../services/store';
 
 const App = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const ingridientsState = useSelector((state: RootState) => state.ingredients);
+  const ingridientsState = useSelector((state) => state.ingredients);
 
-  const ingridients = ingridientsState.data;
   const isIngridientsLoading = ingridientsState.isLoading;
   const isIngridientsError = ingridientsState.error;
 
-  const userState = useSelector((state: RootState) => state.user);
-
-  const isUserAuthenticated = userState.user;
-  const isUserChecked = userState.checked;
-
   const background = location.state?.background;
+
+  console.log(background);
+  console.log(location);
 
   useEffect(() => {
     dispatch(fetchIngridients());
@@ -69,31 +63,31 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <UnAuthUserRoute>
+            <ProtectedRoute onlyUnAuth>
               <Login />
-            </UnAuthUserRoute>
+            </ProtectedRoute>
           }
         />
         <Route
           path='/register'
           element={
-            <UnAuthUserRoute>
+            <ProtectedRoute onlyUnAuth>
               <Register />
-            </UnAuthUserRoute>
+            </ProtectedRoute>
           }
         />
         <Route
           path='/forgot-password'
           element={
-            <UnAuthUserRoute>
+            <ProtectedRoute onlyUnAuth>
               <ForgotPassword />
-            </UnAuthUserRoute>
+            </ProtectedRoute>
           }
         />
         <Route
           path='/reset-password'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute onlyUnAuth>
               <ResetPassword />
             </ProtectedRoute>
           }

@@ -1,14 +1,21 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector, UseSelector } from 'react-redux';
 import { Preloader } from '@ui';
-import { RootState } from 'src/services/root-reducer';
+import { useSelector } from '../../services/store';
 
-export const ProtectedRoute = (props: { children: ReactNode }) => {
+type ProtectedRouteProps = {
+  onlyUnAuth?: boolean;
+  children: React.ReactElement;
+};
+
+export const ProtectedRoute = ({
+  onlyUnAuth = false,
+  children
+}: ProtectedRouteProps) => {
   const location = useLocation();
-  const userState = useSelector((state: RootState) => state.user);
+  const userState = useSelector((state) => state.user);
 
-  if (!userState.user) {
+  if (!userState.user && !onlyUnAuth) {
     return <Navigate to='/login' state={{ from: location }} replace />;
   }
 
@@ -16,5 +23,10 @@ export const ProtectedRoute = (props: { children: ReactNode }) => {
     return <Preloader />;
   }
 
-  return <>{props.children}</>;
+  if (onlyUnAuth && userState.user) {
+    const from = location.state?.from?.pathname || { pathname: '/' };
+    return <Navigate replace to={from} />;
+  }
+
+  return children;
 };

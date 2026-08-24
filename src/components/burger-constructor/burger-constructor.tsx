@@ -1,25 +1,23 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from 'src/services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { RootState } from 'src/services/root-reducer';
 import {
   clearOrderModalData,
   createOrder
 } from '../../services/slices/order-slice';
 
 export const BurgerConstructor: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const burgerConstructorState = useSelector(
-    (state: RootState) => state.burgerConstructor
+    (state) => state.burgerConstructor
   );
-  const orderState = useSelector((state: RootState) => state.order);
-  const isAuth = useSelector((state: RootState) => state.user.user);
+  const orderState = useSelector((state) => state.order);
+  const isAuth = useSelector((state) => state.user.user);
 
   const constructorItems = {
     bun: burgerConstructorState.bun,
@@ -31,14 +29,14 @@ export const BurgerConstructor: FC = () => {
   const orderModalData = orderState.orderRequestModalData;
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return;
-
     if (!isAuth) {
-      return navigate('/', {
+      return navigate('/login', {
         replace: true,
         state: { from: location }
       });
     }
+
+    if (!constructorItems.bun || orderRequest) return;
 
     const ingredients = [
       constructorItems.bun._id,
