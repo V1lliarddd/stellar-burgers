@@ -57,7 +57,10 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         >
           <div className={styles.link_position_last}>
             <ProfileIcon type={isInProfile ? 'primary' : 'secondary'} />
-            <p className='text text_type_main-default ml-2'>
+            <p
+              className='text text_type_main-default ml-2'
+              data-testid='profile'
+            >
               {userName || 'Личный кабинет'}
             </p>
           </div>
