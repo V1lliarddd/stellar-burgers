@@ -3,8 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Отображение ингридиентов', async ({ page }) => {
   await page.routeFromHAR('./tests/har-files/ingredients.har', {
     url: '**/api/ingredients',
-    notFound: 'abort',
-    update: true
+    notFound: 'abort'
   });
 
   await page.goto('/');
@@ -17,8 +16,7 @@ test('Отображение ингридиентов', async ({ page }) => {
 test('Добавление ингридиентов', async ({ page }) => {
   await page.routeFromHAR('./tests/har-files/ingredients.har', {
     url: '**/api/ingredients',
-    notFound: 'abort',
-    update: true
+    notFound: 'abort'
   });
 
   await page.goto('/');
@@ -71,8 +69,7 @@ test('Добавление ингридиентов', async ({ page }) => {
 test('Функционал модального окна', async ({ page }) => {
   await page.routeFromHAR('./tests/har-files/ingredients.har', {
     url: '**/api/ingredients',
-    notFound: 'abort',
-    update: true
+    notFound: 'abort'
   });
 
   await page.goto('/');
@@ -120,20 +117,17 @@ test('Функционал создания заказа', async ({ page, contex
 
   await page.routeFromHAR('./tests/har-files/ingredients.har', {
     url: '**/api/ingredients',
-    notFound: 'abort',
-    update: true
+    notFound: 'abort'
   });
 
   await page.routeFromHAR('./tests/har-files/user.har', {
     url: '**/api/auth/user',
-    notFound: 'abort',
-    update: true
+    notFound: 'abort'
   });
 
   await page.routeFromHAR('./tests/har-files/order.har', {
     url: '**/api/orders',
-    notFound: 'abort',
-    update: true
+    notFound: 'abort'
   });
 
   await page.goto('/');
