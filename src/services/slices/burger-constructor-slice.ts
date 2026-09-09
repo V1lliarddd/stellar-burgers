@@ -7,7 +7,7 @@ export type ConstructorState = {
   ingridients: TConstructorIngredient[];
 };
 
-const initialState: ConstructorState = {
+export const initialState: ConstructorState = {
   bun: null,
   ingridients: []
 };

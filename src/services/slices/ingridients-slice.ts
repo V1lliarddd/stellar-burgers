@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getIngredientsApi } from '@api';
-import { TIngredient } from '@utils-types';
+import { getIngredientsApi } from '../../utils/burger-api';
+import { TIngredient } from '../../utils/types';
 
 export type TIngridientsState = {
   data: TIngredient[];
@@ -8,7 +8,7 @@ export type TIngridientsState = {
   error: string | null;
 };
 
-const initialState: TIngridientsState = {
+export const initialState: TIngridientsState = {
   data: [],
   isLoading: false,
   error: null
