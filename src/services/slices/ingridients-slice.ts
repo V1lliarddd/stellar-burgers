@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getIngredientsApi } from '../../utils/burger-api';
-import { TIngredient } from '../../utils/types';
+import { getIngredientsApi } from '@api';
+import { TIngredient } from '@utils-types';
 
 export type TIngridientsState = {
   data: TIngredient[];
@@ -46,7 +46,9 @@ const ingridientsSlice = createSlice({
         }
       )
       .addCase(fetchIngridients.rejected, (state, action) => {
-        (state.isLoading = false), (state.error = action.payload || 'Error');
+        (state.isLoading = false),
+          (state.error =
+            action.payload || 'Не получилось загрузить ингридиенты');
       });
   }
 });

@@ -92,7 +92,10 @@ const config: JestConfigWithTsJest = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '^@api$': '<rootDir>/src/utils/burger-api',
+    '^@utils-types$': '<rootDir>/src/utils/types'
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -191,7 +194,7 @@ const config: JestConfigWithTsJest = {
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   testPathIgnorePatterns: [
     '/node_modules/',
-    '\\.pl\\.tsx$' // исключаем Playwright-тесты
+    '<rootDir>/tests/' // исключаем Playwright-тесты
   ]
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them

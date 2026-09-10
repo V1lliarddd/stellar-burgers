@@ -1,4 +1,5 @@
 import ingridientsSlice, {
+  deleteError,
   fetchIngridients,
   initialState
 } from '../slices/ingridients-slice';
@@ -62,7 +63,18 @@ describe('Проверка редьюсера ingredients', () => {
     const state = ingridientsSlice.reducer(prevState, action);
 
     expect(state.isLoading).toBe(false);
-    expect(state.error).toBeDefined();
+    expect(state.error).toBe('Не получилось загрузить ингридиенты');
+  });
+
+  it('Проверка deleteError', () => {
+    const prevState = {
+      ...initialState,
+      error: 'some error'
+    };
+    const action = deleteError();
+    const state = ingridientsSlice.reducer(prevState, action);
+
+    expect(state.error).toEqual(null);
   });
 
   it('Проверка UNKNOWN_ACTION', () => {
