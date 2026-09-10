@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TConstructorIngredient } from '../../utils/types';
+import { TConstructorIngredient } from '@utils-types';
 import { createOrder } from './order-slice';
 
 export type ConstructorState = {
@@ -7,7 +7,7 @@ export type ConstructorState = {
   ingridients: TConstructorIngredient[];
 };
 
-const initialState: ConstructorState = {
+export const initialState: ConstructorState = {
   bun: null,
   ingridients: []
 };

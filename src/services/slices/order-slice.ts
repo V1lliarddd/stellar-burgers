@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { orderBurgerApi, getOrdersApi, getOrderByNumberApi } from '@api';
-import { TOrder } from '@utils-types';
+import {
+  orderBurgerApi,
+  getOrdersApi,
+  getOrderByNumberApi
+} from '../../utils/burger-api';
+import { TOrder } from '../../utils/types';
 
 export type TOrderState = {
   orderRequest: boolean;

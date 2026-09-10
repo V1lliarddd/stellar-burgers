@@ -8,7 +8,7 @@ export type TIngridientsState = {
   error: string | null;
 };
 
-const initialState: TIngridientsState = {
+export const initialState: TIngridientsState = {
   data: [],
   isLoading: false,
   error: null
@@ -46,7 +46,9 @@ const ingridientsSlice = createSlice({
         }
       )
       .addCase(fetchIngridients.rejected, (state, action) => {
-        (state.isLoading = false), (state.error = action.payload || 'Error');
+        (state.isLoading = false),
+          (state.error =
+            action.payload || 'Не получилось загрузить ингридиенты');
       });
   }
 });
